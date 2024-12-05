@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "DEFAULT_PROGRAM", "label": "Program: DEFAULT_PROGRAM", "shape": "box"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_PROGRAM-ID", "label": "Paragraph: PROGRAM-ID", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_COCRDLIC", "label": "Paragraph: COCRDLIC", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_DATE-WRITTEN", "label": "Paragraph: DATE-WRITTEN", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_DATE-COMPILED", "label": "Paragraph: DATE-COMPILED", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_Today", "label": "Paragraph: Today", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_LOW-VALUES", "label": "Paragraph: LOW-VALUES", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_WS-EDIT-SELECT-ERROR-FLAGS", "label": "Paragraph: WS-EDIT-SELECT-ERROR-FLAGS", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_0000-MAIN", "label": "Paragraph: 0000-MAIN", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_YYYY-STORE-PFKEY", "label": "Paragraph: YYYY-STORE-PFKEY", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2000-RECEIVE-MAP", "label": "Paragraph: 2000-RECEIVE-MAP", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_9000-READ-FORWARD", "label": "Paragraph: 9000-READ-FORWARD", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1000-SEND-MAP", "label": "Paragraph: 1000-SEND-MAP", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_9100-READ-BACKWARDS", "label": "Paragraph: 9100-READ-BACKWARDS", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_COMMON-RETURN", "label": "Paragraph: COMMON-RETURN", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_0000-MAIN-EXIT", "label": "Paragraph: 0000-MAIN-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1100-SCREEN-INIT", "label": "Paragraph: 1100-SCREEN-INIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1200-SCREEN-ARRAY-INIT", "label": "Paragraph: 1200-SCREEN-ARRAY-INIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1250-SETUP-ARRAY-ATTRIBS", "label": "Paragraph: 1250-SETUP-ARRAY-ATTRIBS", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1300-SETUP-SCREEN-ATTRS", "label": "Paragraph: 1300-SETUP-SCREEN-ATTRS", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1400-SETUP-MESSAGE", "label": "Paragraph: 1400-SETUP-MESSAGE", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1500-SEND-SCREEN", "label": "Paragraph: 1500-SEND-SCREEN", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1000-SEND-MAP-EXIT", "label": "Paragraph: 1000-SEND-MAP-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1100-SCREEN-INIT-EXIT", "label": "Paragraph: 1100-SCREEN-INIT-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1200-SCREEN-ARRAY-INIT-EXIT", "label": "Paragraph: 1200-SCREEN-ARRAY-INIT-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1250-SETUP-ARRAY-ATTRIBS-EXIT", "label": "Paragraph: 1250-SETUP-ARRAY-ATTRIBS-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1300-SETUP-SCREEN-ATTRS-EXIT", "label": "Paragraph: 1300-SETUP-SCREEN-ATTRS-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1400-SETUP-MESSAGE-EXIT", "label": "Paragraph: 1400-SETUP-MESSAGE-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_1500-SEND-SCREEN-EXIT", "label": "Paragraph: 1500-SEND-SCREEN-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2100-RECEIVE-SCREEN", "label": "Paragraph: 2100-RECEIVE-SCREEN", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2200-EDIT-INPUTS", "label": "Paragraph: 2200-EDIT-INPUTS", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2000-RECEIVE-MAP-EXIT", "label": "Paragraph: 2000-RECEIVE-MAP-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2100-RECEIVE-SCREEN-EXIT", "label": "Paragraph: 2100-RECEIVE-SCREEN-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2210-EDIT-ACCOUNT", "label": "Paragraph: 2210-EDIT-ACCOUNT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2220-EDIT-CARD", "label": "Paragraph: 2220-EDIT-CARD", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2250-EDIT-ARRAY", "label": "Paragraph: 2250-EDIT-ARRAY", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2200-EDIT-INPUTS-EXIT", "label": "Paragraph: 2200-EDIT-INPUTS-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2210-EDIT-ACCOUNT-EXIT", "label": "Paragraph: 2210-EDIT-ACCOUNT-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2220-EDIT-CARD-EXIT", "label": "Paragraph: 2220-EDIT-CARD-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_VARYING", "label": "Paragraph: VARYING", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_2250-EDIT-ARRAY-EXIT", "label": "Paragraph: 2250-EDIT-ARRAY-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_UNTIL", "label": "Paragraph: UNTIL", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_9500-FILTER-RECORDS", "label": "Paragraph: 9500-FILTER-RECORDS", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_9000-READ-FORWARD-EXIT", "label": "Paragraph: 9000-READ-FORWARD-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_9100-READ-BACKWARDS-EXIT", "label": "Paragraph: 9100-READ-BACKWARDS-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_9500-FILTER-RECORDS-EXIT", "label": "Paragraph: 9500-FILTER-RECORDS-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_SEND-PLAIN-TEXT", "label": "Paragraph: SEND-PLAIN-TEXT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_SEND-PLAIN-TEXT-EXIT", "label": "Paragraph: SEND-PLAIN-TEXT-EXIT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_SEND-LONG-TEXT", "label": "Paragraph: SEND-LONG-TEXT", "shape": "ellipse"}, {"color": "#97c2fc", "id": "DEFAULT_PROGRAM_SEND-LONG-TEXT-EXIT", "label": "Paragraph: SEND-LONG-TEXT-EXIT", "shape": "ellipse"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_PROGRAM-ID"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_COCRDLIC"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_DATE-WRITTEN"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_DATE-COMPILED"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_Today"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_LOW-VALUES"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_WS-EDIT-SELECT-ERROR-FLAGS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_0000-MAIN"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_COMMON-RETURN"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_0000-MAIN-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1000-SEND-MAP"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1000-SEND-MAP-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1100-SCREEN-INIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1100-SCREEN-INIT-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1200-SCREEN-ARRAY-INIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1200-SCREEN-ARRAY-INIT-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1250-SETUP-ARRAY-ATTRIBS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1250-SETUP-ARRAY-ATTRIBS-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1300-SETUP-SCREEN-ATTRS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1300-SETUP-SCREEN-ATTRS-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1400-SETUP-MESSAGE"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1400-SETUP-MESSAGE-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1500-SEND-SCREEN"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_1500-SEND-SCREEN-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2000-RECEIVE-MAP"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2000-RECEIVE-MAP-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2100-RECEIVE-SCREEN"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2100-RECEIVE-SCREEN-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2200-EDIT-INPUTS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2200-EDIT-INPUTS-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2210-EDIT-ACCOUNT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2210-EDIT-ACCOUNT-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2220-EDIT-CARD"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2220-EDIT-CARD-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2250-EDIT-ARRAY"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_2250-EDIT-ARRAY-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_9000-READ-FORWARD"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_9000-READ-FORWARD-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_9100-READ-BACKWARDS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_9100-READ-BACKWARDS-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_9500-FILTER-RECORDS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_9500-FILTER-RECORDS-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_SEND-PLAIN-TEXT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_SEND-PLAIN-TEXT-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_SEND-LONG-TEXT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM", "label": "", "title": "", "to": "DEFAULT_PROGRAM_SEND-LONG-TEXT-EXIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_0000-MAIN", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_YYYY-STORE-PFKEY"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_0000-MAIN", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_2000-RECEIVE-MAP"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_0000-MAIN", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_9000-READ-FORWARD"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_0000-MAIN", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_1000-SEND-MAP"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_0000-MAIN", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_9100-READ-BACKWARDS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_2000-RECEIVE-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_2100-RECEIVE-SCREEN"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_2000-RECEIVE-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_2200-EDIT-INPUTS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_9000-READ-FORWARD", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_UNTIL"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_9000-READ-FORWARD", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_9500-FILTER-RECORDS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_1000-SEND-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_1100-SCREEN-INIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_1000-SEND-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_1200-SCREEN-ARRAY-INIT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_1000-SEND-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_1250-SETUP-ARRAY-ATTRIBS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_1000-SEND-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_1300-SETUP-SCREEN-ATTRS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_1000-SEND-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_1400-SETUP-MESSAGE"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_1000-SEND-MAP", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_1500-SEND-SCREEN"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_9100-READ-BACKWARDS", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_UNTIL"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_9100-READ-BACKWARDS", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_9500-FILTER-RECORDS"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_2200-EDIT-INPUTS", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_2210-EDIT-ACCOUNT"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_2200-EDIT-INPUTS", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_2220-EDIT-CARD"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_2200-EDIT-INPUTS", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_2250-EDIT-ARRAY"}, {"arrows": "to", "from": "DEFAULT_PROGRAM_2250-EDIT-ARRAY", "label": "PERFORM", "title": "PERFORM", "to": "DEFAULT_PROGRAM_VARYING"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"shapeProperties": {"useBorderWithImage": true}}, "edges": {"smooth": {"type": "cubicBezier", "forceDirection": "vertical", "roundness": 0.4}, "arrows": {"to": {"enabled": true}}}, "layout": {"hierarchical": {"enabled": true, "levelSeparation": 200, "nodeSpacing": 250, "treeSpacing": 300, "direction": "UD", "sortMethod": "directed"}}, "interaction": {"dragNodes": true, "dragView": true, "hover": true, "zoomView": true, "hideEdgesOnDrag": false, "hideNodesOnDrag": false}, "physics": {"enabled": true, "stabilization": {"enabled": true}}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

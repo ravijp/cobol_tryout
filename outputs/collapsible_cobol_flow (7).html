@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Interactive COBOL Control Flow</title>
+    <style>
+        body {{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: white;
+        }}
+        .node circle {{
+            stroke-width: 2px;
+            cursor: pointer;
+            transition: fill 0.3s, stroke 0.3s;
+        }}
+        .node text {{
+            font: 14px sans-serif;
+            fill: #000;
+            pointer-events: none;
+        }}
+        .link {{
+            fill: none;
+            stroke: #d2b48c; /* Light brown lines */
+            stroke-width: 1.5px;
+        }}
+    </style>
+</head>
+<body>
+    <script>
+        const data = {
+  "name": "Control Flow",
+  "children": [
+    {
+      "name": null,
+      "children": [
+        {
+          "name": "PROGRAM-ID",
+          "children": []
+        },
+        {
+          "name": "COCRDLIC",
+          "children": []
+        },
+        {
+          "name": "DATE-WRITTEN",
+          "children": []
+        },
+        {
+          "name": "DATE-COMPILED",
+          "children": []
+        },
+        {
+          "name": "Today",
+          "children": []
+        },
+        {
+          "name": "LOW-VALUES",
+          "children": []
+        },
+        {
+          "name": "WS-EDIT-SELECT-ERROR-FLAGS",
+          "children": []
+        },
+        {
+          "name": "0000-MAIN",
+          "children": [
+            {
+              "name": "YYYY-STORE-PFKEY",
+              "children": []
+            },
+            {
+              "name": "2000-RECEIVE-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9100-READ-BACKWARDS",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "YYYY-STORE-PFKEY",
+          "children": []
+        },
+        {
+          "name": "2000-RECEIVE-MAP",
+          "children": [
+            {
+              "name": "2100-RECEIVE-SCREEN",
+              "children": []
+            },
+            {
+              "name": "2200-EDIT-INPUTS",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "9000-READ-FORWARD",
+          "children": [
+            {
+              "name": "UNTIL",
+              "children": []
+            },
+            {
+              "name": "9500-FILTER-RECORDS",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "1000-SEND-MAP",
+          "children": [
+            {
+              "name": "1100-SCREEN-INIT",
+              "children": []
+            },
+            {
+              "name": "1200-SCREEN-ARRAY-INIT",
+              "children": []
+            },
+            {
+              "name": "1250-SETUP-ARRAY-ATTRIBS",
+              "children": []
+            },
+            {
+              "name": "1300-SETUP-SCREEN-ATTRS",
+              "children": []
+            },
+            {
+              "name": "1400-SETUP-MESSAGE",
+              "children": []
+            },
+            {
+              "name": "1500-SEND-SCREEN",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "9100-READ-BACKWARDS",
+          "children": [
+            {
+              "name": "UNTIL",
+              "children": []
+            },
+            {
+              "name": "9500-FILTER-RECORDS",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "COMMON-RETURN",
+          "children": []
+        },
+        {
+          "name": "0000-MAIN-EXIT",
+          "children": []
+        },
+        {
+          "name": "1100-SCREEN-INIT",
+          "children": []
+        },
+        {
+          "name": "1200-SCREEN-ARRAY-INIT",
+          "children": []
+        },
+        {
+          "name": "1250-SETUP-ARRAY-ATTRIBS",
+          "children": []
+        },
+        {
+          "name": "1300-SETUP-SCREEN-ATTRS",
+          "children": []
+        },
+        {
+          "name": "1400-SETUP-MESSAGE",
+          "children": []
+        },
+        {
+          "name": "1500-SEND-SCREEN",
+          "children": []
+        },
+        {
+          "name": "1000-SEND-MAP-EXIT",
+          "children": []
+        },
+        {
+          "name": "1100-SCREEN-INIT-EXIT",
+          "children": []
+        },
+        {
+          "name": "1200-SCREEN-ARRAY-INIT-EXIT",
+          "children": []
+        },
+        {
+          "name": "1250-SETUP-ARRAY-ATTRIBS-EXIT",
+          "children": []
+        },
+        {
+          "name": "1300-SETUP-SCREEN-ATTRS-EXIT",
+          "children": []
+        },
+        {
+          "name": "1400-SETUP-MESSAGE-EXIT",
+          "children": []
+        },
+        {
+          "name": "1500-SEND-SCREEN-EXIT",
+          "children": []
+        },
+        {
+          "name": "2100-RECEIVE-SCREEN",
+          "children": []
+        },
+        {
+          "name": "2200-EDIT-INPUTS",
+          "children": [
+            {
+              "name": "2210-EDIT-ACCOUNT",
+              "children": []
+            },
+            {
+              "name": "2220-EDIT-CARD",
+              "children": []
+            },
+            {
+              "name": "2250-EDIT-ARRAY",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "2000-RECEIVE-MAP-EXIT",
+          "children": []
+        },
+        {
+          "name": "2100-RECEIVE-SCREEN-EXIT",
+          "children": []
+        },
+        {
+          "name": "2210-EDIT-ACCOUNT",
+          "children": []
+        },
+        {
+          "name": "2220-EDIT-CARD",
+          "children": []
+        },
+        {
+          "name": "2250-EDIT-ARRAY",
+          "children": [
+            {
+              "name": "VARYING",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "2200-EDIT-INPUTS-EXIT",
+          "children": []
+        },
+        {
+          "name": "2210-EDIT-ACCOUNT-EXIT",
+          "children": []
+        },
+        {
+          "name": "2220-EDIT-CARD-EXIT",
+          "children": []
+        },
+        {
+          "name": "VARYING",
+          "children": []
+        },
+        {
+          "name": "2250-EDIT-ARRAY-EXIT",
+          "children": []
+        },
+        {
+          "name": "UNTIL",
+          "children": []
+        },
+        {
+          "name": "9500-FILTER-RECORDS",
+          "children": []
+        },
+        {
+          "name": "9000-READ-FORWARD-EXIT",
+          "children": []
+        },
+        {
+          "name": "9100-READ-BACKWARDS-EXIT",
+          "children": []
+        },
+        {
+          "name": "9500-FILTER-RECORDS-EXIT",
+          "children": []
+        },
+        {
+          "name": "SEND-PLAIN-TEXT",
+          "children": []
+        },
+        {
+          "name": "SEND-PLAIN-TEXT-EXIT",
+          "children": []
+        },
+        {
+          "name": "SEND-LONG-TEXT",
+          "children": []
+        },
+        {
+          "name": "SEND-LONG-TEXT-EXIT",
+          "children": []
+        }
+      ]
+    }
+  ]
+};
+
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        const zoomLayer = svg.append("g");
+
+        const simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(d => d.id).distance(120))
+            .force("charge", d3.forceManyBody().strength(-500))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide(50)); // Prevents overlapping
+
+        const root = d3.hierarchy(data);
+        const nodes = [];
+        const links = [];
+
+        root.each(node => {
+            node.id = node.data.name; // Assign unique ID
+            if (node.parent) {
+                links.push({ source: node.parent.id, target: node.id });
+            }
+            nodes.push(node);
+        });
+
+        const link = zoomLayer.selectAll(".link")
+            .data(links)
+            .enter().append("line")
+            .attr("class", "link");
+
+        const node = zoomLayer.selectAll(".node")
+            .data(nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .call(d3.drag()
+                .on("start", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    d.fx = d.x;
+                    d.fy = d.y;
+                })
+                .on("drag", (event, d) => {
+                    d.fx = event.x;
+                    d.fy = event.y;
+                })
+                .on("end", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0);
+                    d.fx = null;
+                    d.fy = null;
+                }));
+
+        node.append("circle")
+            .attr("r", 8)
+            .attr("fill", d => d.depth % 2 === 0 ? "#69b3a2" : "#ffa726") // Alternating colors for depth
+            .attr("stroke", d => (d.children || d._children ? "#000" : "#aaa")) // Black stroke for collapsible nodes
+            .on("click", (event, d) => {
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                simulation.alpha(0.3).restart(); // Restart simulation for layout updates
+            });
+
+        node.append("text")
+            .attr("dy", 3)
+            .attr("x", 12)
+            .style("text-anchor", "start")
+            .text(d => d.data.name);
+
+        simulation.nodes(nodes).on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node.attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+
+        simulation.force("link").links(links);
+
+        // Initial zoom to fit graph
+        const zoom = d3.zoom()
+            .scaleExtent([0.5, 2])
+            .on("zoom", (event) => {
+                zoomLayer.attr("transform", event.transform);
+            });
+
+        svg.call(zoom);
+
+        // Center graph initially
+        const bbox = zoomLayer.node().getBBox();
+        const initialScale = Math.min(width / bbox.width, height / bbox.height) * 0.8;
+        const translateX = (width - bbox.width * initialScale) / 2;
+        const translateY = (height - bbox.height * initialScale) / 2;
+
+        svg.transition()
+            .duration(500)
+            .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(initialScale));
+    </script>
+</body>
+</html>
+    

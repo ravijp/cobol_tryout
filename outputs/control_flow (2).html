@@ -1,0 +1,250 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 1000px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 1000px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "PROGRAM-ID", "label": "PROGRAM-ID", "shape": "box"}, {"color": "#97c2fc", "id": "DB102A", "label": "DB102A", "shape": "box"}, {"color": "#97c2fc", "id": "AUTHOR", "label": "AUTHOR", "shape": "box"}, {"color": "#97c2fc", "id": "INSTALLATION", "label": "INSTALLATION", "shape": "box"}, {"color": "#97c2fc", "id": "DATE-WRITTEN", "label": "DATE-WRITTEN", "shape": "box"}, {"color": "#97c2fc", "id": "SECURITY", "label": "SECURITY", "shape": "box"}, {"color": "#97c2fc", "id": "NONE", "label": "NONE", "shape": "box"}, {"color": "#97c2fc", "id": "SOURCE-COMPUTER", "label": "SOURCE-COMPUTER", "shape": "box"}, {"color": "#97c2fc", "id": "OBJECT-COMPUTER", "label": "OBJECT-COMPUTER", "shape": "box"}, {"color": "#97c2fc", "id": "XXXXX083", "label": "XXXXX083", "shape": "box"}, {"color": "#97c2fc", "id": "FILE-CONTROL", "label": "FILE-CONTROL", "shape": "box"}, {"color": "#97c2fc", "id": "XXXXX055", "label": "XXXXX055", "shape": "box"}, {"color": "#97c2fc", "id": "SPACE", "label": "SPACE", "shape": "box"}, {"color": "#97c2fc", "id": "DECLARATIVES", "label": "DECLARATIVES", "shape": "box"}, {"color": "#97c2fc", "id": "BEGIN-START-UP", "label": "BEGIN-START-UP", "shape": "box"}, {"color": "#97c2fc", "id": "DB-COMMON", "label": "DB-COMMON", "shape": "box"}, {"color": "#97c2fc", "id": "PROC-SERIES-TEST", "label": "PROC-SERIES-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "FAIL", "label": "FAIL", "shape": "box"}, {"color": "#97c2fc", "id": "PROC-SERIES-WRITE", "label": "PROC-SERIES-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "PASS", "label": "PASS", "shape": "box"}, {"color": "#97c2fc", "id": "BEGIN-FALL-THROUGH-AND-SERIES", "label": "BEGIN-FALL-THROUGH-AND-SERIES", "shape": "box"}, {"color": "#97c2fc", "id": "BEGIN-GO-TO", "label": "BEGIN-GO-TO", "shape": "box"}, {"color": "#97c2fc", "id": "BEGIN-ALTER-PARAGRAPH", "label": "BEGIN-ALTER-PARAGRAPH", "shape": "box"}, {"color": "#97c2fc", "id": "BEGIN-LOOP-ITERATION", "label": "BEGIN-LOOP-ITERATION", "shape": "box"}, {"color": "#97c2fc", "id": "BEGIN-PERFORM-THRU", "label": "BEGIN-PERFORM-THRU", "shape": "box"}, {"color": "#97c2fc", "id": "OPEN-FILES", "label": "OPEN-FILES", "shape": "box"}, {"color": "#97c2fc", "id": "HEAD-ROUTINE THRU COLUMN-NAMES-ROUTINE", "label": "HEAD-ROUTINE THRU COLUMN-NAMES-ROUTINE", "shape": "box"}, {"color": "#97c2fc", "id": "CLOSE-FILES", "label": "CLOSE-FILES", "shape": "box"}, {"color": "#97c2fc", "id": "END-ROUTINE THRU END-ROUTINE-13", "label": "END-ROUTINE THRU END-ROUTINE-13", "shape": "box"}, {"color": "#97c2fc", "id": "TERMINATE-CCVS", "label": "TERMINATE-CCVS", "shape": "box"}, {"color": "#97c2fc", "id": "TERMINATE-CALL", "label": "TERMINATE-CALL", "shape": "box"}, {"color": "#97c2fc", "id": "PRINT-DETAIL", "label": "PRINT-DETAIL", "shape": "box"}, {"color": "#97c2fc", "id": "WRITE-LINE", "label": "WRITE-LINE", "shape": "box"}, {"color": "#97c2fc", "id": "FAIL-ROUTINE THRU FAIL-ROUTINE-EX", "label": "FAIL-ROUTINE THRU FAIL-ROUTINE-EX", "shape": "box"}, {"color": "#97c2fc", "id": "BAIL-OUT THRU BAIL-OUT-EX", "label": "BAIL-OUT THRU BAIL-OUT-EX", "shape": "box"}, {"color": "#97c2fc", "id": "HEAD-ROUTINE", "label": "HEAD-ROUTINE", "shape": "box"}, {"color": "#97c2fc", "id": "COLUMN-NAMES-ROUTINE", "label": "COLUMN-NAMES-ROUTINE", "shape": "box"}, {"color": "#97c2fc", "id": "END-ROUTINE", "label": "END-ROUTINE", "shape": "box"}, {"color": "#97c2fc", "id": "END-RTN-EXIT", "label": "END-RTN-EXIT", "shape": "box"}, {"color": "#97c2fc", "id": "END-ROUTINE-1", "label": "END-ROUTINE-1", "shape": "box"}, {"color": "#97c2fc", "id": "END-ROUTINE-12", "label": "END-ROUTINE-12", "shape": "box"}, {"color": "#97c2fc", "id": "END-ROUTINE-13", "label": "END-ROUTINE-13", "shape": "box"}, {"color": "#97c2fc", "id": "WRT-LN", "label": "WRT-LN", "shape": "box"}, {"color": "#97c2fc", "id": "BLANK-LINE-PRINT", "label": "BLANK-LINE-PRINT", "shape": "box"}, {"color": "#97c2fc", "id": "FAIL-ROUTINE", "label": "FAIL-ROUTINE", "shape": "box"}, {"color": "#97c2fc", "id": "FAIL-ROUTINE-WRITE", "label": "FAIL-ROUTINE-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "BAIL-OUT", "label": "BAIL-OUT", "shape": "box"}, {"color": "#97c2fc", "id": "BAIL-OUT-WRITE", "label": "BAIL-OUT-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "CCVS1-EXIT", "label": "CCVS1-EXIT", "shape": "box"}, {"color": "#97c2fc", "id": "EXIT", "label": "EXIT", "shape": "box"}, {"color": "#97c2fc", "id": "START-PROGRAM-TEST", "label": "START-PROGRAM-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "START-PROGRAM-WRITE", "label": "START-PROGRAM-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "START-PROGRAM-DELETE", "label": "START-PROGRAM-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "DE-LETE", "label": "DE-LETE", "shape": "box"}, {"color": "#97c2fc", "id": "FALL-THROUGH-TEST", "label": "FALL-THROUGH-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "FALL-THROUGH-WRITE", "label": "FALL-THROUGH-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "FALL-THROUGH-DELETE", "label": "FALL-THROUGH-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "PROC-SERIES-DELETE", "label": "PROC-SERIES-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "ALTERABLE-PARAGRAPH", "label": "ALTERABLE-PARAGRAPH", "shape": "box"}, {"color": "#97c2fc", "id": "FILLER-PARAGRAPH", "label": "FILLER-PARAGRAPH", "shape": "box"}, {"color": "#97c2fc", "id": "GO-TO-TEST", "label": "GO-TO-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "GO-TO-WRITE", "label": "GO-TO-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "GO-TO-DELETE", "label": "GO-TO-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "ALTER-TEST-INIT", "label": "ALTER-TEST-INIT", "shape": "box"}, {"color": "#97c2fc", "id": "ALTER-TEST", "label": "ALTER-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "ALTER-WRITE", "label": "ALTER-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "ALTER-DELETE", "label": "ALTER-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "ALTER-WRITE-END", "label": "ALTER-WRITE-END", "shape": "box"}, {"color": "#97c2fc", "id": "ALTERED-GO-TO-TEST", "label": "ALTERED-GO-TO-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "ALTERED-GO-TO-WRITE", "label": "ALTERED-GO-TO-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "ALTERED-GO-TO-DELETE", "label": "ALTERED-GO-TO-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "PERF-ITERATION-TEST", "label": "PERF-ITERATION-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "LOOP-ROUTINE", "label": "LOOP-ROUTINE", "shape": "box"}, {"color": "#97c2fc", "id": "PERF-ITERATION-WRITE", "label": "PERF-ITERATION-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "PERF-ITERATION-DELETE", "label": "PERF-ITERATION-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "PERF-ITERATION-END", "label": "PERF-ITERATION-END", "shape": "box"}, {"color": "#97c2fc", "id": "DO-NOTHING", "label": "DO-NOTHING", "shape": "box"}, {"color": "#97c2fc", "id": "DO-NOTHING-1", "label": "DO-NOTHING-1", "shape": "box"}, {"color": "#97c2fc", "id": "PERFORM-THRU-TEST", "label": "PERFORM-THRU-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "DO-NOTHING THRU DO-NOTHING-1", "label": "DO-NOTHING THRU DO-NOTHING-1", "shape": "box"}, {"color": "#97c2fc", "id": "PERFORM-THRU-WRITE", "label": "PERFORM-THRU-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "PERFORM-THRU-DELETE", "label": "PERFORM-THRU-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "SIMPLE-PERFORM-TEST", "label": "SIMPLE-PERFORM-TEST", "shape": "box"}, {"color": "#97c2fc", "id": "SIMPLE-PERFORM-WRITE", "label": "SIMPLE-PERFORM-WRITE", "shape": "box"}, {"color": "#97c2fc", "id": "SIMPLE-PERFORM-DELETE", "label": "SIMPLE-PERFORM-DELETE", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TESTS-INIT", "label": "DEBUG-LINE-TESTS-INIT", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TEST-01", "label": "DEBUG-LINE-TEST-01", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-DELETE-01", "label": "DEBUG-LINE-DELETE-01", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-WRITE-01", "label": "DEBUG-LINE-WRITE-01", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TEST-02", "label": "DEBUG-LINE-TEST-02", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-DELETE-02", "label": "DEBUG-LINE-DELETE-02", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-WRITE-02", "label": "DEBUG-LINE-WRITE-02", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TEST-03", "label": "DEBUG-LINE-TEST-03", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-DELETE-03", "label": "DEBUG-LINE-DELETE-03", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-WRITE-03", "label": "DEBUG-LINE-WRITE-03", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TEST-04", "label": "DEBUG-LINE-TEST-04", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TEST-04-B", "label": "DEBUG-LINE-TEST-04-B", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-DELETE-04", "label": "DEBUG-LINE-DELETE-04", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-WRITE-04", "label": "DEBUG-LINE-WRITE-04", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TEST-05", "label": "DEBUG-LINE-TEST-05", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-TEST-05-C", "label": "DEBUG-LINE-TEST-05-C", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-DELETE-05", "label": "DEBUG-LINE-DELETE-05", "shape": "box"}, {"color": "#97c2fc", "id": "DEBUG-LINE-WRITE-05", "label": "DEBUG-LINE-WRITE-05", "shape": "box"}, {"color": "#97c2fc", "id": "CCVS-999999", "label": "CCVS-999999", "shape": "box"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "PROGRAM-ID", "title": "SEQUENTIAL", "to": "DB102A"}, {"arrows": "to", "from": "DB102A", "title": "SEQUENTIAL", "to": "AUTHOR"}, {"arrows": "to", "from": "AUTHOR", "title": "SEQUENTIAL", "to": "INSTALLATION"}, {"arrows": "to", "from": "INSTALLATION", "title": "SEQUENTIAL", "to": "DATE-WRITTEN"}, {"arrows": "to", "from": "DATE-WRITTEN", "title": "SEQUENTIAL", "to": "SECURITY"}, {"arrows": "to", "from": "SECURITY", "title": "SEQUENTIAL", "to": "NONE"}, {"arrows": "to", "from": "NONE", "title": "SEQUENTIAL", "to": "SOURCE-COMPUTER"}, {"arrows": "to", "from": "SOURCE-COMPUTER", "title": "SEQUENTIAL", "to": "OBJECT-COMPUTER"}, {"arrows": "to", "from": "OBJECT-COMPUTER", "title": "SEQUENTIAL", "to": "XXXXX083"}, {"arrows": "to", "from": "XXXXX083", "title": "SEQUENTIAL", "to": "FILE-CONTROL"}, {"arrows": "to", "from": "FILE-CONTROL", "title": "SEQUENTIAL", "to": "XXXXX055"}, {"arrows": "to", "from": "XXXXX055", "title": "SEQUENTIAL", "to": "SPACE"}, {"arrows": "to", "from": "SPACE", "title": "SEQUENTIAL", "to": "DECLARATIVES"}, {"arrows": "to", "from": "DECLARATIVES", "title": "SEQUENTIAL", "to": "BEGIN-START-UP"}, {"arrows": "to", "from": "BEGIN-START-UP", "title": "SEQUENTIAL", "to": "DB-COMMON"}, {"arrows": "to", "from": "DB-COMMON", "title": "SEQUENTIAL", "to": "PROC-SERIES-TEST"}, {"arrows": "to", "from": "PROC-SERIES-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "PROC-SERIES-TEST", "title": "PERFORM", "to": "PROC-SERIES-WRITE"}, {"arrows": "to", "from": "PROC-SERIES-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "PROC-SERIES-TEST", "title": "SEQUENTIAL", "to": "BEGIN-FALL-THROUGH-AND-SERIES"}, {"arrows": "to", "from": "PROC-SERIES-TEST", "title": "SEQUENTIAL", "to": "PROC-SERIES-DELETE"}, {"arrows": "to", "from": "FAIL", "title": "SEQUENTIAL", "to": "DEBUG-LINE-DELETE-03"}, {"arrows": "to", "from": "PROC-SERIES-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "PROC-SERIES-WRITE", "title": "SEQUENTIAL", "to": "ALTERABLE-PARAGRAPH"}, {"arrows": "to", "from": "BEGIN-FALL-THROUGH-AND-SERIES", "title": "PERFORM", "to": "DB-COMMON"}, {"arrows": "to", "from": "BEGIN-FALL-THROUGH-AND-SERIES", "title": "SEQUENTIAL", "to": "BEGIN-GO-TO"}, {"arrows": "to", "from": "BEGIN-GO-TO", "title": "PERFORM", "to": "DB-COMMON"}, {"arrows": "to", "from": "BEGIN-GO-TO", "title": "SEQUENTIAL", "to": "BEGIN-ALTER-PARAGRAPH"}, {"arrows": "to", "from": "BEGIN-ALTER-PARAGRAPH", "title": "PERFORM", "to": "DB-COMMON"}, {"arrows": "to", "from": "BEGIN-ALTER-PARAGRAPH", "title": "SEQUENTIAL", "to": "BEGIN-LOOP-ITERATION"}, {"arrows": "to", "from": "BEGIN-LOOP-ITERATION", "title": "PERFORM", "to": "DB-COMMON"}, {"arrows": "to", "from": "BEGIN-LOOP-ITERATION", "title": "SEQUENTIAL", "to": "BEGIN-PERFORM-THRU"}, {"arrows": "to", "from": "BEGIN-PERFORM-THRU", "title": "PERFORM", "to": "DB-COMMON"}, {"arrows": "to", "from": "BEGIN-PERFORM-THRU", "title": "SEQUENTIAL", "to": "OPEN-FILES"}, {"arrows": "to", "from": "OPEN-FILES", "title": "PERFORM", "to": "HEAD-ROUTINE THRU COLUMN-NAMES-ROUTINE"}, {"arrows": "to", "from": "OPEN-FILES", "title": "SEQUENTIAL", "to": "CLOSE-FILES"}, {"arrows": "to", "from": "CLOSE-FILES", "title": "PERFORM", "to": "END-ROUTINE THRU END-ROUTINE-13"}, {"arrows": "to", "from": "CLOSE-FILES", "title": "SEQUENTIAL", "to": "TERMINATE-CCVS"}, {"arrows": "to", "from": "TERMINATE-CCVS", "title": "SEQUENTIAL", "to": "TERMINATE-CALL"}, {"arrows": "to", "from": "TERMINATE-CALL", "title": "SEQUENTIAL", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "PRINT-DETAIL", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "PRINT-DETAIL", "title": "PERFORM", "to": "FAIL-ROUTINE THRU FAIL-ROUTINE-EX"}, {"arrows": "to", "from": "PRINT-DETAIL", "title": "PERFORM", "to": "BAIL-OUT THRU BAIL-OUT-EX"}, {"arrows": "to", "from": "PRINT-DETAIL", "title": "SEQUENTIAL", "to": "HEAD-ROUTINE"}, {"arrows": "to", "from": "WRITE-LINE", "title": "SEQUENTIAL", "to": "WRT-LN"}, {"arrows": "to", "from": "HEAD-ROUTINE", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "HEAD-ROUTINE", "title": "SEQUENTIAL", "to": "COLUMN-NAMES-ROUTINE"}, {"arrows": "to", "from": "COLUMN-NAMES-ROUTINE", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "COLUMN-NAMES-ROUTINE", "title": "SEQUENTIAL", "to": "END-ROUTINE"}, {"arrows": "to", "from": "END-ROUTINE", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "END-ROUTINE", "title": "SEQUENTIAL", "to": "END-RTN-EXIT"}, {"arrows": "to", "from": "END-RTN-EXIT", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "END-RTN-EXIT", "title": "SEQUENTIAL", "to": "END-ROUTINE-1"}, {"arrows": "to", "from": "END-ROUTINE-1", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "END-ROUTINE-1", "title": "SEQUENTIAL", "to": "END-ROUTINE-12"}, {"arrows": "to", "from": "END-ROUTINE-12", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "END-ROUTINE-12", "title": "SEQUENTIAL", "to": "END-ROUTINE-13"}, {"arrows": "to", "from": "END-ROUTINE-13", "title": "SEQUENTIAL", "to": "WRITE-LINE"}, {"arrows": "to", "from": "WRT-LN", "title": "SEQUENTIAL", "to": "BLANK-LINE-PRINT"}, {"arrows": "to", "from": "BLANK-LINE-PRINT", "title": "PERFORM", "to": "WRT-LN"}, {"arrows": "to", "from": "BLANK-LINE-PRINT", "title": "SEQUENTIAL", "to": "FAIL-ROUTINE"}, {"arrows": "to", "from": "FAIL-ROUTINE", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "FAIL-ROUTINE", "title": "SEQUENTIAL", "to": "FAIL-ROUTINE-WRITE"}, {"arrows": "to", "from": "FAIL-ROUTINE-WRITE", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "FAIL-ROUTINE-WRITE", "title": "SEQUENTIAL", "to": "BAIL-OUT"}, {"arrows": "to", "from": "BAIL-OUT", "title": "SEQUENTIAL", "to": "BAIL-OUT-WRITE"}, {"arrows": "to", "from": "BAIL-OUT-WRITE", "title": "PERFORM", "to": "WRITE-LINE"}, {"arrows": "to", "from": "BAIL-OUT-WRITE", "title": "SEQUENTIAL", "to": "CCVS1-EXIT"}, {"arrows": "to", "from": "CCVS1-EXIT", "title": "SEQUENTIAL", "to": "EXIT"}, {"arrows": "to", "from": "EXIT", "title": "SEQUENTIAL", "to": "START-PROGRAM-TEST"}, {"arrows": "to", "from": "START-PROGRAM-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "START-PROGRAM-TEST", "title": "PERFORM", "to": "START-PROGRAM-WRITE"}, {"arrows": "to", "from": "START-PROGRAM-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "START-PROGRAM-TEST", "title": "SEQUENTIAL", "to": "START-PROGRAM-DELETE"}, {"arrows": "to", "from": "START-PROGRAM-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "START-PROGRAM-WRITE", "title": "SEQUENTIAL", "to": "FALL-THROUGH-TEST"}, {"arrows": "to", "from": "START-PROGRAM-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "START-PROGRAM-DELETE", "title": "SEQUENTIAL", "to": "START-PROGRAM-WRITE"}, {"arrows": "to", "from": "FALL-THROUGH-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "FALL-THROUGH-TEST", "title": "PERFORM", "to": "FALL-THROUGH-WRITE"}, {"arrows": "to", "from": "FALL-THROUGH-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "FALL-THROUGH-TEST", "title": "SEQUENTIAL", "to": "FALL-THROUGH-DELETE"}, {"arrows": "to", "from": "FALL-THROUGH-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "FALL-THROUGH-WRITE", "title": "SEQUENTIAL", "to": "PROC-SERIES-TEST"}, {"arrows": "to", "from": "FALL-THROUGH-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "FALL-THROUGH-DELETE", "title": "SEQUENTIAL", "to": "FALL-THROUGH-WRITE"}, {"arrows": "to", "from": "PROC-SERIES-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "PROC-SERIES-DELETE", "title": "SEQUENTIAL", "to": "PROC-SERIES-WRITE"}, {"arrows": "to", "from": "ALTERABLE-PARAGRAPH", "title": "SEQUENTIAL", "to": "FILLER-PARAGRAPH"}, {"arrows": "to", "from": "FILLER-PARAGRAPH", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "FILLER-PARAGRAPH", "title": "SEQUENTIAL", "to": "GO-TO-TEST"}, {"arrows": "to", "from": "GO-TO-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "GO-TO-TEST", "title": "PERFORM", "to": "GO-TO-WRITE"}, {"arrows": "to", "from": "GO-TO-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "GO-TO-TEST", "title": "SEQUENTIAL", "to": "GO-TO-DELETE"}, {"arrows": "to", "from": "GO-TO-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "GO-TO-WRITE", "title": "SEQUENTIAL", "to": "ALTER-TEST-INIT"}, {"arrows": "to", "from": "GO-TO-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "GO-TO-DELETE", "title": "SEQUENTIAL", "to": "GO-TO-WRITE"}, {"arrows": "to", "from": "ALTER-TEST-INIT", "title": "SEQUENTIAL", "to": "ALTER-TEST"}, {"arrows": "to", "from": "ALTER-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "ALTER-TEST", "title": "PERFORM", "to": "ALTER-WRITE"}, {"arrows": "to", "from": "ALTER-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "ALTER-TEST", "title": "SEQUENTIAL", "to": "ALTER-DELETE"}, {"arrows": "to", "from": "ALTER-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "ALTER-WRITE", "title": "SEQUENTIAL", "to": "ALTER-WRITE-END"}, {"arrows": "to", "from": "ALTER-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "ALTER-DELETE", "title": "SEQUENTIAL", "to": "ALTER-WRITE"}, {"arrows": "to", "from": "ALTER-WRITE-END", "title": "SEQUENTIAL", "to": "ALTERED-GO-TO-TEST"}, {"arrows": "to", "from": "ALTERED-GO-TO-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "ALTERED-GO-TO-TEST", "title": "PERFORM", "to": "ALTERED-GO-TO-WRITE"}, {"arrows": "to", "from": "ALTERED-GO-TO-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "ALTERED-GO-TO-TEST", "title": "SEQUENTIAL", "to": "ALTERED-GO-TO-DELETE"}, {"arrows": "to", "from": "ALTERED-GO-TO-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "ALTERED-GO-TO-WRITE", "title": "SEQUENTIAL", "to": "PERF-ITERATION-TEST"}, {"arrows": "to", "from": "ALTERED-GO-TO-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "ALTERED-GO-TO-DELETE", "title": "SEQUENTIAL", "to": "ALTERED-GO-TO-WRITE"}, {"arrows": "to", "from": "PERF-ITERATION-TEST", "title": "PERFORM", "to": "LOOP-ROUTINE"}, {"arrows": "to", "from": "PERF-ITERATION-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "PERF-ITERATION-TEST", "title": "PERFORM", "to": "PERF-ITERATION-WRITE"}, {"arrows": "to", "from": "PERF-ITERATION-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "PERF-ITERATION-TEST", "title": "SEQUENTIAL", "to": "PERF-ITERATION-DELETE"}, {"arrows": "to", "from": "LOOP-ROUTINE", "title": "SEQUENTIAL", "to": "DO-NOTHING"}, {"arrows": "to", "from": "PERF-ITERATION-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "PERF-ITERATION-WRITE", "title": "SEQUENTIAL", "to": "PERF-ITERATION-END"}, {"arrows": "to", "from": "PERF-ITERATION-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "PERF-ITERATION-DELETE", "title": "SEQUENTIAL", "to": "PERF-ITERATION-WRITE"}, {"arrows": "to", "from": "PERF-ITERATION-END", "title": "SEQUENTIAL", "to": "LOOP-ROUTINE"}, {"arrows": "to", "from": "DO-NOTHING", "title": "SEQUENTIAL", "to": "DO-NOTHING-1"}, {"arrows": "to", "from": "DO-NOTHING-1", "title": "SEQUENTIAL", "to": "PERFORM-THRU-TEST"}, {"arrows": "to", "from": "PERFORM-THRU-TEST", "title": "PERFORM", "to": "DO-NOTHING THRU DO-NOTHING-1"}, {"arrows": "to", "from": "PERFORM-THRU-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "PERFORM-THRU-TEST", "title": "PERFORM", "to": "PERFORM-THRU-WRITE"}, {"arrows": "to", "from": "PERFORM-THRU-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "PERFORM-THRU-TEST", "title": "SEQUENTIAL", "to": "PERFORM-THRU-DELETE"}, {"arrows": "to", "from": "PERFORM-THRU-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "PERFORM-THRU-WRITE", "title": "SEQUENTIAL", "to": "SIMPLE-PERFORM-TEST"}, {"arrows": "to", "from": "PERFORM-THRU-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "PERFORM-THRU-DELETE", "title": "SEQUENTIAL", "to": "PERFORM-THRU-WRITE"}, {"arrows": "to", "from": "SIMPLE-PERFORM-TEST", "title": "PERFORM", "to": "LOOP-ROUTINE"}, {"arrows": "to", "from": "SIMPLE-PERFORM-TEST", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "SIMPLE-PERFORM-TEST", "title": "PERFORM", "to": "SIMPLE-PERFORM-WRITE"}, {"arrows": "to", "from": "SIMPLE-PERFORM-TEST", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "SIMPLE-PERFORM-TEST", "title": "SEQUENTIAL", "to": "SIMPLE-PERFORM-DELETE"}, {"arrows": "to", "from": "SIMPLE-PERFORM-WRITE", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "SIMPLE-PERFORM-WRITE", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TESTS-INIT"}, {"arrows": "to", "from": "SIMPLE-PERFORM-DELETE", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "SIMPLE-PERFORM-DELETE", "title": "SEQUENTIAL", "to": "SIMPLE-PERFORM-WRITE"}, {"arrows": "to", "from": "DEBUG-LINE-TESTS-INIT", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TEST-01"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-01", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-01", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-01", "title": "SEQUENTIAL", "to": "DEBUG-LINE-DELETE-01"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-01", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-01", "title": "SEQUENTIAL", "to": "DEBUG-LINE-WRITE-01"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-01", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-01", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TEST-02"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-02", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-02", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-02", "title": "SEQUENTIAL", "to": "DEBUG-LINE-DELETE-02"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-02", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-02", "title": "SEQUENTIAL", "to": "DEBUG-LINE-WRITE-02"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-02", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-02", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TEST-03"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-03", "title": "SEQUENTIAL", "to": "FAIL"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-03", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-03", "title": "SEQUENTIAL", "to": "DEBUG-LINE-WRITE-03"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-03", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-03", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TEST-04"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-04", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TEST-04-B"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-04-B", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-04-B", "title": "SEQUENTIAL", "to": "DEBUG-LINE-DELETE-04"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-04", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-04", "title": "SEQUENTIAL", "to": "DEBUG-LINE-WRITE-04"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-04", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-04", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TEST-05"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-05", "title": "PERFORM", "to": "PASS"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-05", "title": "SEQUENTIAL", "to": "DEBUG-LINE-TEST-05-C"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-05-C", "title": "PERFORM", "to": "FAIL"}, {"arrows": "to", "from": "DEBUG-LINE-TEST-05-C", "title": "SEQUENTIAL", "to": "DEBUG-LINE-DELETE-05"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-05", "title": "PERFORM", "to": "DE-LETE"}, {"arrows": "to", "from": "DEBUG-LINE-DELETE-05", "title": "SEQUENTIAL", "to": "DEBUG-LINE-WRITE-05"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-05", "title": "PERFORM", "to": "PRINT-DETAIL"}, {"arrows": "to", "from": "DEBUG-LINE-WRITE-05", "title": "SEQUENTIAL", "to": "CCVS-999999"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

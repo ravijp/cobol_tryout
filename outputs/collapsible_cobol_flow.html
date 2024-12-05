@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Collapsible Control Flow</title>
+    <style>
+        .node circle {
+            fill: #999;
+            stroke: #555;
+            stroke-width: 2px;
+        }
+        .node text {
+            font: 12px sans-serif;
+        }
+        .link {
+            fill: none;
+            stroke: #555;
+            stroke-opacity: 0.6;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const data = {
+  "name": "Control Flow",
+  "children": [
+    {
+      "name": null,
+      "children": [
+        {
+          "name": "PROGRAM-ID",
+          "children": []
+        },
+        {
+          "name": "COCRDLIC",
+          "children": []
+        },
+        {
+          "name": "DATE-WRITTEN",
+          "children": []
+        },
+        {
+          "name": "DATE-COMPILED",
+          "children": []
+        },
+        {
+          "name": "Today",
+          "children": []
+        },
+        {
+          "name": "LOW-VALUES",
+          "children": []
+        },
+        {
+          "name": "WS-EDIT-SELECT-ERROR-FLAGS",
+          "children": []
+        },
+        {
+          "name": "0000-MAIN",
+          "children": [
+            {
+              "name": "YYYY-STORE-PFKEY",
+              "children": []
+            },
+            {
+              "name": "2000-RECEIVE-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9100-READ-BACKWARDS",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "9000-READ-FORWARD",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            },
+            {
+              "name": "1000-SEND-MAP",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "YYYY-STORE-PFKEY",
+          "children": []
+        },
+        {
+          "name": "2000-RECEIVE-MAP",
+          "children": [
+            {
+              "name": "2100-RECEIVE-SCREEN",
+              "children": []
+            },
+            {
+              "name": "2200-EDIT-INPUTS",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "9000-READ-FORWARD",
+          "children": [
+            {
+              "name": "UNTIL",
+              "children": []
+            },
+            {
+              "name": "9500-FILTER-RECORDS",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "1000-SEND-MAP",
+          "children": [
+            {
+              "name": "1100-SCREEN-INIT",
+              "children": []
+            },
+            {
+              "name": "1200-SCREEN-ARRAY-INIT",
+              "children": []
+            },
+            {
+              "name": "1250-SETUP-ARRAY-ATTRIBS",
+              "children": []
+            },
+            {
+              "name": "1300-SETUP-SCREEN-ATTRS",
+              "children": []
+            },
+            {
+              "name": "1400-SETUP-MESSAGE",
+              "children": []
+            },
+            {
+              "name": "1500-SEND-SCREEN",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "9100-READ-BACKWARDS",
+          "children": [
+            {
+              "name": "UNTIL",
+              "children": []
+            },
+            {
+              "name": "9500-FILTER-RECORDS",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "COMMON-RETURN",
+          "children": []
+        },
+        {
+          "name": "0000-MAIN-EXIT",
+          "children": []
+        },
+        {
+          "name": "1100-SCREEN-INIT",
+          "children": []
+        },
+        {
+          "name": "1200-SCREEN-ARRAY-INIT",
+          "children": []
+        },
+        {
+          "name": "1250-SETUP-ARRAY-ATTRIBS",
+          "children": []
+        },
+        {
+          "name": "1300-SETUP-SCREEN-ATTRS",
+          "children": []
+        },
+        {
+          "name": "1400-SETUP-MESSAGE",
+          "children": []
+        },
+        {
+          "name": "1500-SEND-SCREEN",
+          "children": []
+        },
+        {
+          "name": "1000-SEND-MAP-EXIT",
+          "children": []
+        },
+        {
+          "name": "1100-SCREEN-INIT-EXIT",
+          "children": []
+        },
+        {
+          "name": "1200-SCREEN-ARRAY-INIT-EXIT",
+          "children": []
+        },
+        {
+          "name": "1250-SETUP-ARRAY-ATTRIBS-EXIT",
+          "children": []
+        },
+        {
+          "name": "1300-SETUP-SCREEN-ATTRS-EXIT",
+          "children": []
+        },
+        {
+          "name": "1400-SETUP-MESSAGE-EXIT",
+          "children": []
+        },
+        {
+          "name": "1500-SEND-SCREEN-EXIT",
+          "children": []
+        },
+        {
+          "name": "2100-RECEIVE-SCREEN",
+          "children": []
+        },
+        {
+          "name": "2200-EDIT-INPUTS",
+          "children": [
+            {
+              "name": "2210-EDIT-ACCOUNT",
+              "children": []
+            },
+            {
+              "name": "2220-EDIT-CARD",
+              "children": []
+            },
+            {
+              "name": "2250-EDIT-ARRAY",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "2000-RECEIVE-MAP-EXIT",
+          "children": []
+        },
+        {
+          "name": "2100-RECEIVE-SCREEN-EXIT",
+          "children": []
+        },
+        {
+          "name": "2210-EDIT-ACCOUNT",
+          "children": []
+        },
+        {
+          "name": "2220-EDIT-CARD",
+          "children": []
+        },
+        {
+          "name": "2250-EDIT-ARRAY",
+          "children": [
+            {
+              "name": "VARYING",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "2200-EDIT-INPUTS-EXIT",
+          "children": []
+        },
+        {
+          "name": "2210-EDIT-ACCOUNT-EXIT",
+          "children": []
+        },
+        {
+          "name": "2220-EDIT-CARD-EXIT",
+          "children": []
+        },
+        {
+          "name": "VARYING",
+          "children": []
+        },
+        {
+          "name": "2250-EDIT-ARRAY-EXIT",
+          "children": []
+        },
+        {
+          "name": "UNTIL",
+          "children": []
+        },
+        {
+          "name": "9500-FILTER-RECORDS",
+          "children": []
+        },
+        {
+          "name": "9000-READ-FORWARD-EXIT",
+          "children": []
+        },
+        {
+          "name": "9100-READ-BACKWARDS-EXIT",
+          "children": []
+        },
+        {
+          "name": "9500-FILTER-RECORDS-EXIT",
+          "children": []
+        },
+        {
+          "name": "SEND-PLAIN-TEXT",
+          "children": []
+        },
+        {
+          "name": "SEND-PLAIN-TEXT-EXIT",
+          "children": []
+        },
+        {
+          "name": "SEND-LONG-TEXT",
+          "children": []
+        },
+        {
+          "name": "SEND-LONG-TEXT-EXIT",
+          "children": []
+        }
+      ]
+    }
+  ]
+};
+
+        const width = 960, height = 600;
+
+        const svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(40,0)");
+
+        const tree = d3.tree().size([height, width - 160]);
+
+        const root = d3.hierarchy(data);
+        tree(root);
+
+        const links = svg.selectAll(".link")
+            .data(root.links())
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", d3.linkHorizontal()
+                .x(d => d.y)
+                .y(d => d.x));
+
+        const nodes = svg.selectAll(".node")
+            .data(root.descendants())
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", d => `translate(${d.y},${d.x})`);
+
+        nodes.append("circle")
+            .attr("r", 5)
+            .on("click", (event, d) => {
+                d.children = d.children ? null : d._children;
+                update(d);
+            });
+
+        nodes.append("text")
+            .attr("dy", 3)
+            .attr("x", d => d.children || d._children ? -10 : 10)
+            .style("text-anchor", d => d.children || d._children ? "end" : "start")
+            .text(d => d.data.name);
+
+        const update = (source) => {
+            tree(root);
+            svg.selectAll(".link")
+                .data(root.links())
+                .join("path")
+                .attr("class", "link")
+                .attr("d", d3.linkHorizontal()
+                    .x(d => d.y)
+                    .y(d => d.x));
+            
+            svg.selectAll(".node")
+                .data(root.descendants())
+                .join("g")
+                .attr("class", "node")
+                .attr("transform", d => `translate(${d.y},${d.x})`)
+                .select("circle")
+                .attr("r", 5)
+                .on("click", (event, d) => {
+                    d.children = d.children ? null : d._children;
+                    update(d);
+                });
+        };
+    </script>
+</body>
+</html>
+    
