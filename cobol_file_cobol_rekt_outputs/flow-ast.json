@@ -1,0 +1,1676 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "471e8891-3c21-4172-b485-a6b09ab1a458",
+              "label": "DISPLAY\u0027START O",
+              "name": "DISPLAY\u0027START O",
+              "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT01C\u0027",
+              "type": "DISPLAY",
+              "categories": [
+                "IO"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "756e2bb4-eaab-4d67-833e-e686481d9c61",
+          "label": "DISPLAY\u0027START O",
+          "name": "DISPLAY\u0027START O",
+          "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT01C\u0027.",
+          "type": "SENTENCE",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "bd651ca9-f3af-490e-90f5-3e00717b1b5b",
+              "label": "PERFORM 0000-ACCTFILE-OPEN",
+              "name": "PERFORM0000-ACC",
+              "originalText": "PERFORM 0000-ACCTFILE-OPEN",
+              "type": "PERFORM",
+              "categories": [
+                "CONTROL_FLOW"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "17b2598a-9145-4eda-bdc8-310348e9f7d0",
+          "label": "PERFORM0000-ACC",
+          "name": "PERFORM0000-ACC",
+          "originalText": "PERFORM 0000-ACCTFILE-OPEN.",
+          "type": "SENTENCE",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "c9187078-ca38-4e97-9aec-1255858241ae",
+                          "label": "PERFORM 1000-ACCTFILE-GET-NEXT",
+                          "name": "PERFORM1000-ACC",
+                          "originalText": "PERFORM 1000-ACCTFILE-GET-NEXT",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "id": "a97f7c58-08a4-4ede-a7d7-4329516a3726",
+                                  "label": "DISPLAYACCOUNT-",
+                                  "name": "DISPLAYACCOUNT-",
+                                  "originalText": "DISPLAY ACCOUNT-RECORD",
+                                  "type": "DISPLAY",
+                                  "categories": [
+                                    "IO"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                }
+                              ],
+                              "id": "a986864d-ded2-44f1-97c8-774d33811b5b",
+                              "label": "Yes",
+                              "name": "Yes",
+                              "originalText": "DISPLAY ACCOUNT-RECORD",
+                              "type": "IF_YES",
+                              "categories": [
+                                "DECISION_BRANCH"
+                              ],
+                              "nodeType": "CODE_VERTEX"
+                            }
+                          ],
+                          "id": "d6e1eda8-7d28-4971-96da-aa3272c61369",
+                          "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+                          "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+                          "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY ACCOUNT-RECORD\n                   END-IF",
+                          "type": "IF_BRANCH",
+                          "categories": [
+                            "DECISION"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "da2a3795-7dfb-497f-b3cb-ccdcbbed51f8",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "PERFORM 1000-ACCTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY ACCOUNT-RECORD\n                   END-IF",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "e14293c4-9446-428c-97b6-33dae612a16b",
+                  "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+                  "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+                  "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-ACCTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY ACCOUNT-RECORD\n                   END-IF\n               END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "532674e4-06fc-45d0-b061-8ff25bf5e8fc",
+              "label": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y",
+              "name": "PERFORMUNTILEND",
+              "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-ACCTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY ACCOUNT-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM",
+              "type": "PERFORM",
+              "categories": [
+                "LOOP"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "4187472b-5589-461a-b224-847272db0dd0",
+          "label": "PERFORMUNTILEND",
+          "name": "PERFORMUNTILEND",
+          "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-ACCTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY ACCOUNT-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.",
+          "type": "SENTENCE",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "ab2eea18-a3ea-48ea-8aae-2984dd544f6e",
+              "label": "PERFORM 9000-ACCTFILE-CLOSE",
+              "name": "PERFORM9000-ACC",
+              "originalText": "PERFORM 9000-ACCTFILE-CLOSE",
+              "type": "PERFORM",
+              "categories": [
+                "CONTROL_FLOW"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "aa65c62b-f31a-420c-a614-2630eef5a4ff",
+          "label": "PERFORM9000-ACC",
+          "name": "PERFORM9000-ACC",
+          "originalText": "PERFORM 9000-ACCTFILE-CLOSE.",
+          "type": "SENTENCE",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "4f94b53c-6203-4886-a2d2-717ef8b450aa",
+              "label": "DISPLAY\u0027END OF ",
+              "name": "DISPLAY\u0027END OF ",
+              "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT01C\u0027",
+              "type": "DISPLAY",
+              "categories": [
+                "IO"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "0dd6f28a-eee4-4ccd-bb5c-657bff4610a8",
+          "label": "DISPLAY\u0027END OF ",
+          "name": "DISPLAY\u0027END OF ",
+          "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT01C\u0027.",
+          "type": "SENTENCE",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "3b5721df-0624-40d3-be75-4ab2580151fa",
+              "label": "GOBACK",
+              "name": "GOBACK",
+              "originalText": "GOBACK",
+              "type": "EXIT",
+              "categories": [
+                "TERMINAL"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "542c1fc6-085c-4abe-b915-5751aa32da34",
+          "label": "GOBACK.",
+          "name": "GOBACK.",
+          "originalText": "GOBACK.",
+          "type": "SENTENCE",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "47eacff3-8a8c-458c-a48c-2d8a424d389d",
+              "label": "NAME: 1000-ACCTFILE-GET-NEXT",
+              "name": "NAME: 1000-ACCTFILE-GET-NEXT",
+              "originalText": "1000-ACCTFILE-GET-NEXT",
+              "type": "PARAGRAPH_NAME",
+              "categories": [
+                "GENERIC_CODE"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "26f9edcf-9524-411a-adec-22a94962900d",
+                  "label": "READACCTFILE-FI",
+                  "name": "READACCTFILE-FI",
+                  "originalText": "READ ACCTFILE-FILE INTO ACCOUNT-RECORD",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "bbb77409-fd63-438b-ada6-a51c3733d3a2",
+              "label": "READACCTFILE-FI",
+              "name": "READACCTFILE-FI",
+              "originalText": "READ ACCTFILE-FILE INTO ACCOUNT-RECORD.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "6ecbdfaf-c812-4b80-a10a-1cf4a2788ec6",
+                          "label": "MOVE0TOAPPL-RES",
+                          "name": "MOVE0TOAPPL-RES",
+                          "originalText": "MOVE 0 TO APPL-RESULT",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "71f37f2a-22f4-4aaf-9f1b-37e3e81d473d",
+                          "label": "PERFORM 1100-DISPLAY-ACCT-RECO",
+                          "name": "PERFORM1100-DIS",
+                          "originalText": "PERFORM 1100-DISPLAY-ACCT-RECORD",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "d7979199-8403-4302-bd9d-6563ba33d551",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "MOVE 0 TO APPL-RESULT\n               PERFORM 1100-DISPLAY-ACCT-RECORD",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "724b1c5b-ce92-4b48-b35c-05483d1d2c27",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "id": "5f230052-5ef2-492e-a082-e60808f3e831",
+                                  "label": "MOVE16TOAPPL-RE",
+                                  "name": "MOVE16TOAPPL-RE",
+                                  "originalText": "MOVE 16 TO APPL-RESULT",
+                                  "type": "MOVE",
+                                  "categories": [
+                                    "DATA_FLOW"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                }
+                              ],
+                              "id": "91340278-0b2a-4eb5-bd25-f8ddfdf91826",
+                              "label": "Yes",
+                              "name": "Yes",
+                              "originalText": "MOVE 16 TO APPL-RESULT",
+                              "type": "IF_YES",
+                              "categories": [
+                                "DECISION_BRANCH"
+                              ],
+                              "nodeType": "CODE_VERTEX"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "id": "4c33ed13-99e0-4e70-b1ab-ba2ffdf6b33a",
+                                  "label": "ELSE",
+                                  "name": "ELSE",
+                                  "originalText": "ELSE",
+                                  "type": "SYMBOL",
+                                  "categories": [
+                                    "SYMBOL"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                },
+                                {
+                                  "children": [],
+                                  "id": "7203681c-6642-4a63-ac3c-e573509d7c7a",
+                                  "label": "MOVE12TOAPPL-RE",
+                                  "name": "MOVE12TOAPPL-RE",
+                                  "originalText": "MOVE 12 TO APPL-RESULT",
+                                  "type": "MOVE",
+                                  "categories": [
+                                    "DATA_FLOW"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                }
+                              ],
+                              "id": "e3bc4a31-442a-4540-9932-8d1e1f496ec4",
+                              "label": "No",
+                              "name": "No",
+                              "originalText": "ELSE\n                   MOVE 12 TO APPL-RESULT",
+                              "type": "IF_NO",
+                              "categories": [
+                                "DECISION_BRANCH"
+                              ],
+                              "nodeType": "CODE_VERTEX"
+                            }
+                          ],
+                          "id": "f2586d45-8e7e-4e11-ab62-6f2a041ac04c",
+                          "label": "IS \nACCTFILE-STATUS \u003d \u002710\u0027?\n",
+                          "name": "IS \nACCTFILE-STATUS \u003d \u002710\u0027?\n",
+                          "originalText": "IF  ACCTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+                          "type": "IF_BRANCH",
+                          "categories": [
+                            "DECISION"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "7622aaed-a1cd-4d12-9461-7c2bef2480eb",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n               IF  ACCTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "54fcb7a0-8833-4d7a-bcd7-dc1d0f62dc3f",
+                  "label": "IS \nACCTFILE-STATUS \u003d \u002700\u0027?\n",
+                  "name": "IS \nACCTFILE-STATUS \u003d \u002700\u0027?\n",
+                  "originalText": "IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               PERFORM 1100-DISPLAY-ACCT-RECORD\n           ELSE\n               IF  ACCTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "445310d5-9bf5-42ad-9a92-d34ac2d34821",
+                          "label": "CONTINUE",
+                          "name": "CONTINUE",
+                          "originalText": "CONTINUE",
+                          "type": "GENERIC_STATEMENT",
+                          "categories": [
+                            "GENERIC_CODE"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "dc3e7e31-3a7c-4269-9ad9-a080da5ba25f",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "CONTINUE",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "c87d2442-55ed-4478-b657-8db4ecfb9206",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "id": "819d08da-edc3-46cb-874c-23116588b509",
+                                  "label": "MOVE\u0027Y\u0027TOEND-OF",
+                                  "name": "MOVE\u0027Y\u0027TOEND-OF",
+                                  "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+                                  "type": "MOVE",
+                                  "categories": [
+                                    "DATA_FLOW"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                }
+                              ],
+                              "id": "51c1a418-8565-4313-8768-2ec647fa7cc3",
+                              "label": "Yes",
+                              "name": "Yes",
+                              "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+                              "type": "IF_YES",
+                              "categories": [
+                                "DECISION_BRANCH"
+                              ],
+                              "nodeType": "CODE_VERTEX"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "id": "8e241e6d-3fac-47ee-ac0a-d181d72c423f",
+                                  "label": "ELSE",
+                                  "name": "ELSE",
+                                  "originalText": "ELSE",
+                                  "type": "SYMBOL",
+                                  "categories": [
+                                    "SYMBOL"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                },
+                                {
+                                  "children": [],
+                                  "id": "f2a2695a-630e-4562-b788-4eb0bfa8a617",
+                                  "label": "DISPLAY\u0027ERROR R",
+                                  "name": "DISPLAY\u0027ERROR R",
+                                  "originalText": "DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027",
+                                  "type": "DISPLAY",
+                                  "categories": [
+                                    "IO"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                },
+                                {
+                                  "children": [],
+                                  "id": "c698894c-ef75-4468-ae9c-89202474b5d8",
+                                  "label": "MOVEACCTFILE-ST",
+                                  "name": "MOVEACCTFILE-ST",
+                                  "originalText": "MOVE ACCTFILE-STATUS TO IO-STATUS",
+                                  "type": "MOVE",
+                                  "categories": [
+                                    "DATA_FLOW"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                },
+                                {
+                                  "children": [],
+                                  "id": "705730aa-0ad5-4fcc-b849-33f85df942ca",
+                                  "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+                                  "name": "PERFORM9910-DIS",
+                                  "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+                                  "type": "PERFORM",
+                                  "categories": [
+                                    "CONTROL_FLOW"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                },
+                                {
+                                  "children": [],
+                                  "id": "ae40617d-71dd-46b0-9b48-57204a9127d4",
+                                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                                  "name": "PERFORM9999-ABE",
+                                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                                  "type": "PERFORM",
+                                  "categories": [
+                                    "CONTROL_FLOW"
+                                  ],
+                                  "nodeType": "CODE_VERTEX"
+                                }
+                              ],
+                              "id": "c6ed501d-4e16-4612-bf9f-ee4521188bee",
+                              "label": "No",
+                              "name": "No",
+                              "originalText": "ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM",
+                              "type": "IF_NO",
+                              "categories": [
+                                "DECISION_BRANCH"
+                              ],
+                              "nodeType": "CODE_VERTEX"
+                            }
+                          ],
+                          "id": "be8eefbd-c082-44f4-bb91-84a54209970a",
+                          "label": "IS \nAPPL-EOF?\n",
+                          "name": "IS \nAPPL-EOF?\n",
+                          "originalText": "IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF",
+                          "type": "IF_BRANCH",
+                          "categories": [
+                            "DECISION"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "4f762c10-46d1-420b-87bf-044aab2631cf",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "7dbf11c5-3959-41bd-a85a-ab247df37660",
+                  "label": "IS \nAPPL-AOK?\n",
+                  "name": "IS \nAPPL-AOK?\n",
+                  "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "74602336-f08a-4b36-b1a4-fdffe6020907",
+                  "label": "EXIT",
+                  "name": "EXIT",
+                  "originalText": "EXIT",
+                  "type": "EXIT",
+                  "categories": [
+                    "TERMINAL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "fb8a1360-00f7-40b7-a94b-8627ab881f0d",
+              "label": "IFACCTFILE-STAT",
+              "name": "IFACCTFILE-STAT",
+              "originalText": "IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               PERFORM 1100-DISPLAY-ACCT-RECORD\n           ELSE\n               IF  ACCTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "9b5abc92-703a-40e0-a9cf-22808e0c0fce",
+          "label": "1000-ACCTFILE-GET-NEXT",
+          "name": "1000-ACCTFILE-GET-NEXT",
+          "originalText": "1000-ACCTFILE-GET-NEXT.\n           READ ACCTFILE-FILE INTO ACCOUNT-RECORD.\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               PERFORM 1100-DISPLAY-ACCT-RECORD\n           ELSE\n               IF  ACCTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.",
+          "type": "PARAGRAPH",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "e465bf31-3c8f-4d72-bbfc-94e9a29df85c",
+              "label": "NAME: 1100-DISPLAY-ACCT-RECORD",
+              "name": "NAME: 1100-DISPLAY-ACCT-RECORD",
+              "originalText": "1100-DISPLAY-ACCT-RECORD",
+              "type": "PARAGRAPH_NAME",
+              "categories": [
+                "GENERIC_CODE"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "b76e9c5f-e4c3-4d99-834b-6585d42931ed",
+                  "label": "DISPLAY\u0027ACCT-ID",
+                  "name": "DISPLAY\u0027ACCT-ID",
+                  "originalText": "DISPLAY \u0027ACCT-ID                 :\u0027   ACCT-ID",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "59a87d15-24fb-43f0-9908-f30b9137d348",
+                  "label": "DISPLAY\u0027ACCT-AC",
+                  "name": "DISPLAY\u0027ACCT-AC",
+                  "originalText": "DISPLAY \u0027ACCT-ACTIVE-STATUS      :\u0027   ACCT-ACTIVE-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "ab8e8c92-776a-4243-ae05-3e25f0110899",
+                  "label": "DISPLAY\u0027ACCT-CU",
+                  "name": "DISPLAY\u0027ACCT-CU",
+                  "originalText": "DISPLAY \u0027ACCT-CURR-BAL           :\u0027   ACCT-CURR-BAL",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "017b6b63-81bb-4160-b842-04042941016a",
+                  "label": "DISPLAY\u0027ACCT-CR",
+                  "name": "DISPLAY\u0027ACCT-CR",
+                  "originalText": "DISPLAY \u0027ACCT-CREDIT-LIMIT       :\u0027   ACCT-CREDIT-LIMIT",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "3c40c924-8e30-4d80-842d-74bf49d95668",
+                  "label": "DISPLAY\u0027ACCT-CA",
+                  "name": "DISPLAY\u0027ACCT-CA",
+                  "originalText": "DISPLAY \u0027ACCT-CASH-CREDIT-LIMIT  :\u0027   ACCT-CASH-CREDIT-LIMIT",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "39afcf05-d3a8-459b-9482-15c2f64107fb",
+                  "label": "DISPLAY\u0027ACCT-OP",
+                  "name": "DISPLAY\u0027ACCT-OP",
+                  "originalText": "DISPLAY \u0027ACCT-OPEN-DATE          :\u0027   ACCT-OPEN-DATE",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "47cee1b1-8fbe-4783-8881-1652ec04d264",
+                  "label": "DISPLAY\u0027ACCT-EX",
+                  "name": "DISPLAY\u0027ACCT-EX",
+                  "originalText": "DISPLAY \u0027ACCT-EXPIRAION-DATE     :\u0027   ACCT-EXPIRAION-DATE",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "249ba1fb-7f69-4832-9796-c875817464d0",
+                  "label": "DISPLAY\u0027ACCT-RE",
+                  "name": "DISPLAY\u0027ACCT-RE",
+                  "originalText": "DISPLAY \u0027ACCT-REISSUE-DATE       :\u0027   ACCT-REISSUE-DATE",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "2fd006aa-50d8-4190-a8d4-1718ac95e22b",
+                  "label": "DISPLAY\u0027ACCT-CU",
+                  "name": "DISPLAY\u0027ACCT-CU",
+                  "originalText": "DISPLAY \u0027ACCT-CURR-CYC-CREDIT    :\u0027   ACCT-CURR-CYC-CREDIT",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "1c715495-339e-475b-baf7-290bf45ac347",
+                  "label": "DISPLAY\u0027ACCT-CU",
+                  "name": "DISPLAY\u0027ACCT-CU",
+                  "originalText": "DISPLAY \u0027ACCT-CURR-CYC-DEBIT     :\u0027   ACCT-CURR-CYC-DEBIT",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "2aa7b414-b608-4691-b63a-6597530b4758",
+                  "label": "DISPLAY\u0027ACCT-GR",
+                  "name": "DISPLAY\u0027ACCT-GR",
+                  "originalText": "DISPLAY \u0027ACCT-GROUP-ID           :\u0027   ACCT-GROUP-ID",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "3eac63eb-c1f6-41b4-b0a7-04ad765a9d81",
+                  "label": "DISPLAY\u0027-------",
+                  "name": "DISPLAY\u0027-------",
+                  "originalText": "DISPLAY \u0027-------------------------------------------------\u0027",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "7b5b1277-6bf3-441c-a877-7f1f85cf167c",
+                  "label": "EXIT",
+                  "name": "EXIT",
+                  "originalText": "EXIT",
+                  "type": "EXIT",
+                  "categories": [
+                    "TERMINAL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "5509d098-eb25-4222-9cd6-5e64f8a9658c",
+              "label": "DISPLAY\u0027ACCT-ID",
+              "name": "DISPLAY\u0027ACCT-ID",
+              "originalText": "DISPLAY \u0027ACCT-ID                 :\u0027   ACCT-ID\n           DISPLAY \u0027ACCT-ACTIVE-STATUS      :\u0027   ACCT-ACTIVE-STATUS\n           DISPLAY \u0027ACCT-CURR-BAL           :\u0027   ACCT-CURR-BAL\n           DISPLAY \u0027ACCT-CREDIT-LIMIT       :\u0027   ACCT-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-CASH-CREDIT-LIMIT  :\u0027   ACCT-CASH-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-OPEN-DATE          :\u0027   ACCT-OPEN-DATE\n           DISPLAY \u0027ACCT-EXPIRAION-DATE     :\u0027   ACCT-EXPIRAION-DATE\n           DISPLAY \u0027ACCT-REISSUE-DATE       :\u0027   ACCT-REISSUE-DATE\n           DISPLAY \u0027ACCT-CURR-CYC-CREDIT    :\u0027   ACCT-CURR-CYC-CREDIT\n           DISPLAY \u0027ACCT-CURR-CYC-DEBIT     :\u0027   ACCT-CURR-CYC-DEBIT\n           DISPLAY \u0027ACCT-GROUP-ID           :\u0027   ACCT-GROUP-ID\n           DISPLAY \u0027-------------------------------------------------\u0027\n           EXIT.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "b45784fd-c349-4753-b994-c1defc7e19ab",
+          "label": "1100-DISPLAY-ACCT-RECORD",
+          "name": "1100-DISPLAY-ACCT-RECORD",
+          "originalText": "1100-DISPLAY-ACCT-RECORD.\n           DISPLAY \u0027ACCT-ID                 :\u0027   ACCT-ID\n           DISPLAY \u0027ACCT-ACTIVE-STATUS      :\u0027   ACCT-ACTIVE-STATUS\n           DISPLAY \u0027ACCT-CURR-BAL           :\u0027   ACCT-CURR-BAL\n           DISPLAY \u0027ACCT-CREDIT-LIMIT       :\u0027   ACCT-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-CASH-CREDIT-LIMIT  :\u0027   ACCT-CASH-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-OPEN-DATE          :\u0027   ACCT-OPEN-DATE\n           DISPLAY \u0027ACCT-EXPIRAION-DATE     :\u0027   ACCT-EXPIRAION-DATE\n           DISPLAY \u0027ACCT-REISSUE-DATE       :\u0027   ACCT-REISSUE-DATE\n           DISPLAY \u0027ACCT-CURR-CYC-CREDIT    :\u0027   ACCT-CURR-CYC-CREDIT\n           DISPLAY \u0027ACCT-CURR-CYC-DEBIT     :\u0027   ACCT-CURR-CYC-DEBIT\n           DISPLAY \u0027ACCT-GROUP-ID           :\u0027   ACCT-GROUP-ID\n           DISPLAY \u0027-------------------------------------------------\u0027\n           EXIT.",
+          "type": "PARAGRAPH",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "5628926b-849f-40a0-9514-d69ae217cf16",
+              "label": "NAME: 0000-ACCTFILE-OPEN",
+              "name": "NAME: 0000-ACCTFILE-OPEN",
+              "originalText": "0000-ACCTFILE-OPEN",
+              "type": "PARAGRAPH_NAME",
+              "categories": [
+                "GENERIC_CODE"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "3be6c18b-854e-414e-9cc9-d706f6870499",
+                  "label": "MOVE8TOAPPL-RES",
+                  "name": "MOVE8TOAPPL-RES",
+                  "originalText": "MOVE 8 TO APPL-RESULT",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "8ede6984-0533-45b3-8000-c247a9a9153b",
+              "label": "MOVE8TOAPPL-RES",
+              "name": "MOVE8TOAPPL-RES",
+              "originalText": "MOVE 8 TO APPL-RESULT.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "dc2e1f58-77ac-48be-8cc6-3271654dcd4f",
+                  "label": "OPENINPUTACCTFI",
+                  "name": "OPENINPUTACCTFI",
+                  "originalText": "OPEN INPUT ACCTFILE-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "9ec3700b-60ea-4c9b-9858-a100cb30b5d4",
+                          "label": "MOVE0TOAPPL-RES",
+                          "name": "MOVE0TOAPPL-RES",
+                          "originalText": "MOVE 0 TO APPL-RESULT",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "aacc4460-5d88-4e6c-b379-d7af6ce901c5",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "MOVE 0 TO APPL-RESULT",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "f91bd122-fe69-4d09-a88b-ea4ef098f316",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "883b774a-4867-4a03-9f84-9bf369c9ad2b",
+                          "label": "MOVE12TOAPPL-RE",
+                          "name": "MOVE12TOAPPL-RE",
+                          "originalText": "MOVE 12 TO APPL-RESULT",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "44a27bb1-560c-48dc-b5f8-2dc63b12f0f3",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n               MOVE 12 TO APPL-RESULT",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "0a332e51-92b3-4c89-a25f-818013f4ff25",
+                  "label": "IS \nACCTFILE-STATUS \u003d \u002700\u0027?\n",
+                  "name": "IS \nACCTFILE-STATUS \u003d \u002700\u0027?\n",
+                  "originalText": "IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "80e10144-cbed-48d2-98b1-86faf2858160",
+                          "label": "CONTINUE",
+                          "name": "CONTINUE",
+                          "originalText": "CONTINUE",
+                          "type": "GENERIC_STATEMENT",
+                          "categories": [
+                            "GENERIC_CODE"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "b5a99f3a-5109-4643-b28e-d6064a0bac45",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "CONTINUE",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "36881113-4060-4e3c-85dd-8376eb072a0f",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "d37325e1-6de8-45d5-89ee-d80b0166074f",
+                          "label": "DISPLAY\u0027ERROR O",
+                          "name": "DISPLAY\u0027ERROR O",
+                          "originalText": "DISPLAY \u0027ERROR OPENING ACCTFILE\u0027",
+                          "type": "DISPLAY",
+                          "categories": [
+                            "IO"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "31b5c2c1-f61a-4e91-baa7-bcdcf41bd6b1",
+                          "label": "MOVEACCTFILE-ST",
+                          "name": "MOVEACCTFILE-ST",
+                          "originalText": "MOVE ACCTFILE-STATUS TO IO-STATUS",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "216201d9-ea70-462d-b27a-194807ec8649",
+                          "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+                          "name": "PERFORM9910-DIS",
+                          "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "cc6d1869-0e48-490c-8d48-6e4950b60133",
+                          "label": "PERFORM 9999-ABEND-PROGRAM",
+                          "name": "PERFORM9999-ABE",
+                          "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "593d0fd6-1506-4ab0-9697-2d4823e8ae58",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n               DISPLAY \u0027ERROR OPENING ACCTFILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "5ab6e952-a316-4ce2-a59d-bcf5fac35b53",
+                  "label": "IS \nAPPL-AOK?\n",
+                  "name": "IS \nAPPL-AOK?\n",
+                  "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING ACCTFILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "6d1436d8-7430-43e0-9540-915845b63a3f",
+                  "label": "EXIT",
+                  "name": "EXIT",
+                  "originalText": "EXIT",
+                  "type": "EXIT",
+                  "categories": [
+                    "TERMINAL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "d0f0b5c4-08da-4e13-aa58-8f2c3452e5e9",
+              "label": "OPENINPUTACCTFI",
+              "name": "OPENINPUTACCTFI",
+              "originalText": "OPEN INPUT ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING ACCTFILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "61f637ca-d28c-4777-8f5a-fdca80340f11",
+          "label": "0000-ACCTFILE-OPEN",
+          "name": "0000-ACCTFILE-OPEN",
+          "originalText": "0000-ACCTFILE-OPEN.\n           MOVE 8 TO APPL-RESULT.\n           OPEN INPUT ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING ACCTFILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+          "type": "PARAGRAPH",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "bf237a24-c4d6-41cf-ba79-db01e5aa7ae4",
+              "label": "NAME: 9000-ACCTFILE-CLOSE",
+              "name": "NAME: 9000-ACCTFILE-CLOSE",
+              "originalText": "9000-ACCTFILE-CLOSE",
+              "type": "PARAGRAPH_NAME",
+              "categories": [
+                "GENERIC_CODE"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "3bf26198-a9e1-4fa2-824a-656da195deb2",
+                  "label": "ADD8TOZEROGIVIN",
+                  "name": "ADD8TOZEROGIVIN",
+                  "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT",
+                  "type": "ADD",
+                  "categories": [
+                    "COMPUTATIONAL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "eb159de7-efbe-42bc-aab9-d2c5f2a23e6d",
+              "label": "ADD8TOZEROGIVIN",
+              "name": "ADD8TOZEROGIVIN",
+              "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "b941dbe9-5908-4f67-943e-d7273050295a",
+                  "label": "CLOSEACCTFILE-F",
+                  "name": "CLOSEACCTFILE-F",
+                  "originalText": "CLOSE ACCTFILE-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "f29331a3-c684-4795-a5ed-626c02efb98a",
+                          "label": "SUBTRACTAPPL-RE",
+                          "name": "SUBTRACTAPPL-RE",
+                          "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+                          "type": "SUBTRACT",
+                          "categories": [
+                            "COMPUTATIONAL",
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "5fcf514e-de02-44d6-8165-4efa8a74f683",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "eadb58a4-8aa9-43d7-b1dc-cd3e874a8a6e",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "46deebfc-e3ae-4292-b6eb-889b85a9c535",
+                          "label": "ADD12TOZEROGIVI",
+                          "name": "ADD12TOZEROGIVI",
+                          "originalText": "ADD 12 TO ZERO GIVING APPL-RESULT",
+                          "type": "ADD",
+                          "categories": [
+                            "COMPUTATIONAL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "7ea8d314-4a5d-4f0c-9725-34733061d0cc",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "9b5ee253-007b-479d-b726-c6cb08024200",
+                  "label": "IS \nACCTFILE-STATUS \u003d \u002700\u0027?\n",
+                  "name": "IS \nACCTFILE-STATUS \u003d \u002700\u0027?\n",
+                  "originalText": "IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "d95607cf-0d85-498e-93a4-298bbb31783a",
+                          "label": "CONTINUE",
+                          "name": "CONTINUE",
+                          "originalText": "CONTINUE",
+                          "type": "GENERIC_STATEMENT",
+                          "categories": [
+                            "GENERIC_CODE"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "f440adea-55f0-4d12-90c6-8942909d833d",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "CONTINUE",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "ebdb893f-3569-4ee7-b4eb-02d473070147",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "1390f0e3-591c-4073-865c-195ffc4144c0",
+                          "label": "DISPLAY\u0027ERROR C",
+                          "name": "DISPLAY\u0027ERROR C",
+                          "originalText": "DISPLAY \u0027ERROR CLOSING ACCOUNT FILE\u0027",
+                          "type": "DISPLAY",
+                          "categories": [
+                            "IO"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "f934c398-4d1c-40ed-bb8d-a2ce94c12a3c",
+                          "label": "MOVEACCTFILE-ST",
+                          "name": "MOVEACCTFILE-ST",
+                          "originalText": "MOVE ACCTFILE-STATUS TO IO-STATUS",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "55d0a0f4-cc99-44a5-b7c0-efc563703e3a",
+                          "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+                          "name": "PERFORM9910-DIS",
+                          "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "e511d16a-513a-4504-b4d3-c55c286eeaee",
+                          "label": "PERFORM 9999-ABEND-PROGRAM",
+                          "name": "PERFORM9999-ABE",
+                          "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "0dfcc851-9cf6-4df4-b125-f3a6784eca34",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n               DISPLAY \u0027ERROR CLOSING ACCOUNT FILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "4f92b92c-36bf-46f1-8fde-937d7a9728ff",
+                  "label": "IS \nAPPL-AOK?\n",
+                  "name": "IS \nAPPL-AOK?\n",
+                  "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING ACCOUNT FILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "a1b1aaac-ffd7-44ed-a0c4-34453597a11f",
+                  "label": "EXIT",
+                  "name": "EXIT",
+                  "originalText": "EXIT",
+                  "type": "EXIT",
+                  "categories": [
+                    "TERMINAL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "3f842b35-822e-43f6-b0ff-bee28676d247",
+              "label": "CLOSEACCTFILE-F",
+              "name": "CLOSEACCTFILE-F",
+              "originalText": "CLOSE ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING ACCOUNT FILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "fdbf504d-dd21-4336-a25a-1a8db47b8ae9",
+          "label": "9000-ACCTFILE-CLOSE",
+          "name": "9000-ACCTFILE-CLOSE",
+          "originalText": "9000-ACCTFILE-CLOSE.\n           ADD 8 TO ZERO GIVING APPL-RESULT.\n           CLOSE ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING ACCOUNT FILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+          "type": "PARAGRAPH",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "b9ccf8ea-8ec4-49bf-b35a-654ae86e58c4",
+              "label": "NAME: 9999-ABEND-PROGRAM",
+              "name": "NAME: 9999-ABEND-PROGRAM",
+              "originalText": "9999-ABEND-PROGRAM",
+              "type": "PARAGRAPH_NAME",
+              "categories": [
+                "GENERIC_CODE"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "f5c1e4bd-a8a6-4982-843a-eff5501604be",
+                  "label": "DISPLAY\u0027ABENDIN",
+                  "name": "DISPLAY\u0027ABENDIN",
+                  "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "c6e0fb6e-aadf-4f64-ae3a-d51775199340",
+                  "label": "MOVE0TOTIMING",
+                  "name": "MOVE0TOTIMING",
+                  "originalText": "MOVE 0 TO TIMING",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "dda77abc-09f0-43ee-8708-fe73c532e440",
+                  "label": "MOVE999TOABCODE",
+                  "name": "MOVE999TOABCODE",
+                  "originalText": "MOVE 999 TO ABCODE",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "30d0e4c1-81c6-4bc1-8dc8-32be0a0f4392",
+                  "label": "CALL \u0027CEE3ABD\u0027",
+                  "name": "CALL\u0027CEE3ABD\u0027",
+                  "originalText": "CALL \u0027CEE3ABD\u0027",
+                  "type": "CALL",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "e58b15ce-8cf1-45c7-9299-f2b96440132f",
+              "label": "DISPLAY\u0027ABENDIN",
+              "name": "DISPLAY\u0027ABENDIN",
+              "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "9c943a36-5bb0-4e31-a487-ed71c59676c8",
+          "label": "9999-ABEND-PROGRAM",
+          "name": "9999-ABEND-PROGRAM",
+          "originalText": "9999-ABEND-PROGRAM.\n           DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027.",
+          "type": "PARAGRAPH",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "9db03b6e-79c0-43d7-8d1b-93e620749b46",
+              "label": "NAME: 9910-DISPLAY-IO-STATUS",
+              "name": "NAME: 9910-DISPLAY-IO-STATUS",
+              "originalText": "9910-DISPLAY-IO-STATUS",
+              "type": "PARAGRAPH_NAME",
+              "categories": [
+                "GENERIC_CODE"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "6dba6a09-98bd-474a-887b-221a399ddf61",
+                          "label": "MOVEIO-STAT1TOI",
+                          "name": "MOVEIO-STAT1TOI",
+                          "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "d3e80d2a-32ce-48c6-b38e-4a3d5192aa99",
+                          "label": "MOVE0TOTWO-BYTE",
+                          "name": "MOVE0TOTWO-BYTE",
+                          "originalText": "MOVE 0        TO TWO-BYTES-BINARY",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "c721d8d9-9da2-4e69-a9de-90cc8ae3f760",
+                          "label": "MOVEIO-STAT2TOT",
+                          "name": "MOVEIO-STAT2TOT",
+                          "originalText": "MOVE IO-STAT2 TO TWO-BYTES-RIGHT",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "b8a8c11d-8ca1-4cde-b96f-6c41cb63cc39",
+                          "label": "MOVETWO-BYTES-B",
+                          "name": "MOVETWO-BYTES-B",
+                          "originalText": "MOVE TWO-BYTES-BINARY TO IO-STATUS-0403",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "71705a03-ad7e-4fda-affe-a394763ec975",
+                          "label": "DISPLAY\u0027FILE ST",
+                          "name": "DISPLAY\u0027FILE ST",
+                          "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+                          "type": "DISPLAY",
+                          "categories": [
+                            "IO"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "d4926905-08b5-485d-a377-88ce9703190f",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "4a0ad937-9561-48c8-9c59-7c5840b5dbbf",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "433674b9-cf4c-467b-bb82-1d74b899e1b5",
+                          "label": "MOVE\u00270000\u0027TOIO-",
+                          "name": "MOVE\u00270000\u0027TOIO-",
+                          "originalText": "MOVE \u00270000\u0027 TO IO-STATUS-04",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "9b0e7c4b-29b1-4106-b163-d4c629d4dc87",
+                          "label": "MOVEIO-STATUSTO",
+                          "name": "MOVEIO-STATUSTO",
+                          "originalText": "MOVE IO-STATUS TO IO-STATUS-04(3:2)",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "c692ce15-707d-43c7-a17f-9e356528e3a8",
+                          "label": "DISPLAY\u0027FILE ST",
+                          "name": "DISPLAY\u0027FILE ST",
+                          "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+                          "type": "DISPLAY",
+                          "categories": [
+                            "IO"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "c6f34056-7253-4883-9b29-bc691de84bf2",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "a5834842-cbfd-4953-97a6-e54837523c82",
+                  "label": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+                  "name": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+                  "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "25ed720f-428d-452f-8e25-69f7c4e51c7a",
+                  "label": "EXIT",
+                  "name": "EXIT",
+                  "originalText": "EXIT",
+                  "type": "EXIT",
+                  "categories": [
+                    "TERMINAL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "ff005145-6153-4bff-aa69-2065d9598d0e",
+              "label": "IFIO-STATUSNOTN",
+              "name": "IFIO-STATUSNOTN",
+              "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+              "type": "SENTENCE",
+              "categories": [
+                "CODE_BLOCK"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "7de43122-f484-431a-8801-f28ea8a7da06",
+          "label": "9910-DISPLAY-IO-STATUS",
+          "name": "9910-DISPLAY-IO-STATUS",
+          "originalText": "9910-DISPLAY-IO-STATUS.\n           IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+          "type": "PARAGRAPH",
+          "categories": [
+            "CODE_BLOCK"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "b586c849-2ec3-4706-83cb-873a2900e953",
+      "label": "para-group:",
+      "name": "para-group:",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT01C\u0027.\n           PERFORM 0000-ACCTFILE-OPEN.\n       \n           PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-ACCTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY ACCOUNT-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.\n       \n           PERFORM 9000-ACCTFILE-CLOSE.\n       \n           DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT01C\u0027.\n       \n           GOBACK.\n       \n       \n       \n       \n       1000-ACCTFILE-GET-NEXT.\n           READ ACCTFILE-FILE INTO ACCOUNT-RECORD.\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               PERFORM 1100-DISPLAY-ACCT-RECORD\n           ELSE\n               IF  ACCTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.\n       \n       1100-DISPLAY-ACCT-RECORD.\n           DISPLAY \u0027ACCT-ID                 :\u0027   ACCT-ID\n           DISPLAY \u0027ACCT-ACTIVE-STATUS      :\u0027   ACCT-ACTIVE-STATUS\n           DISPLAY \u0027ACCT-CURR-BAL           :\u0027   ACCT-CURR-BAL\n           DISPLAY \u0027ACCT-CREDIT-LIMIT       :\u0027   ACCT-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-CASH-CREDIT-LIMIT  :\u0027   ACCT-CASH-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-OPEN-DATE          :\u0027   ACCT-OPEN-DATE\n           DISPLAY \u0027ACCT-EXPIRAION-DATE     :\u0027   ACCT-EXPIRAION-DATE\n           DISPLAY \u0027ACCT-REISSUE-DATE       :\u0027   ACCT-REISSUE-DATE\n           DISPLAY \u0027ACCT-CURR-CYC-CREDIT    :\u0027   ACCT-CURR-CYC-CREDIT\n           DISPLAY \u0027ACCT-CURR-CYC-DEBIT     :\u0027   ACCT-CURR-CYC-DEBIT\n           DISPLAY \u0027ACCT-GROUP-ID           :\u0027   ACCT-GROUP-ID\n           DISPLAY \u0027-------------------------------------------------\u0027\n           EXIT.\n       \n       0000-ACCTFILE-OPEN.\n           MOVE 8 TO APPL-RESULT.\n           OPEN INPUT ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING ACCTFILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9000-ACCTFILE-CLOSE.\n           ADD 8 TO ZERO GIVING APPL-RESULT.\n           CLOSE ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING ACCOUNT FILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9999-ABEND-PROGRAM.\n           DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027.\n       \n       \n       9910-DISPLAY-IO-STATUS.\n           IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+      "type": "PARAGRAPHS",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "id": "cdfe3282-dab8-4ef5-907d-3cc060482639",
+  "label": "ProcedureDivisionBodyContext/cdfe3282-dab8-4ef5-907d-3cc060482639",
+  "name": "ProcedureDivisionBodyContext/cdfe3282-dab8-4ef5-907d-3cc060482639",
+  "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT01C\u0027.\n           PERFORM 0000-ACCTFILE-OPEN.\n       \n           PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-ACCTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY ACCOUNT-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.\n       \n           PERFORM 9000-ACCTFILE-CLOSE.\n       \n           DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT01C\u0027.\n       \n           GOBACK.\n       \n       \n       \n       \n       1000-ACCTFILE-GET-NEXT.\n           READ ACCTFILE-FILE INTO ACCOUNT-RECORD.\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               PERFORM 1100-DISPLAY-ACCT-RECORD\n           ELSE\n               IF  ACCTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING ACCOUNT FILE\u0027\n                   MOVE ACCTFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.\n       \n       1100-DISPLAY-ACCT-RECORD.\n           DISPLAY \u0027ACCT-ID                 :\u0027   ACCT-ID\n           DISPLAY \u0027ACCT-ACTIVE-STATUS      :\u0027   ACCT-ACTIVE-STATUS\n           DISPLAY \u0027ACCT-CURR-BAL           :\u0027   ACCT-CURR-BAL\n           DISPLAY \u0027ACCT-CREDIT-LIMIT       :\u0027   ACCT-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-CASH-CREDIT-LIMIT  :\u0027   ACCT-CASH-CREDIT-LIMIT\n           DISPLAY \u0027ACCT-OPEN-DATE          :\u0027   ACCT-OPEN-DATE\n           DISPLAY \u0027ACCT-EXPIRAION-DATE     :\u0027   ACCT-EXPIRAION-DATE\n           DISPLAY \u0027ACCT-REISSUE-DATE       :\u0027   ACCT-REISSUE-DATE\n           DISPLAY \u0027ACCT-CURR-CYC-CREDIT    :\u0027   ACCT-CURR-CYC-CREDIT\n           DISPLAY \u0027ACCT-CURR-CYC-DEBIT     :\u0027   ACCT-CURR-CYC-DEBIT\n           DISPLAY \u0027ACCT-GROUP-ID           :\u0027   ACCT-GROUP-ID\n           DISPLAY \u0027-------------------------------------------------\u0027\n           EXIT.\n       \n       0000-ACCTFILE-OPEN.\n           MOVE 8 TO APPL-RESULT.\n           OPEN INPUT ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING ACCTFILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9000-ACCTFILE-CLOSE.\n           ADD 8 TO ZERO GIVING APPL-RESULT.\n           CLOSE ACCTFILE-FILE\n           IF  ACCTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING ACCOUNT FILE\u0027\n               MOVE ACCTFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9999-ABEND-PROGRAM.\n           DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027.\n       \n       \n       9910-DISPLAY-IO-STATUS.\n           IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+  "type": "PROCEDURE_DIVISION_BODY",
+  "categories": [
+    "CODE_BLOCK"
+  ],
+  "nodeType": "CODE_VERTEX"
+}
